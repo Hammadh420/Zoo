@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/HOME.CSS">
+    <link rel="icon" type="image/x-icon" href="./logo/CENTRAL ZOO LOGO.png">
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+      }
+  
+      body {
+        background: #e8f5e9;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+  
+      /* NAVBAR */
+      header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(34, 139, 34, 0.8); /* transparent forest green */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        z-index: 999;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+  
+      .logo-container {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+  
+      .logo img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+  
+      .logo-text {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+  
+      nav {
+        display: flex;
+        align-items: center;
+      }
+  
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+      }
+  
+      nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+  
+      nav ul li a:hover {
+        color: yellow;
+      }
+  
+      .menu-btn {
+        display: none;
+        font-size: 26px;
+        color: white;
+        cursor: pointer;
+      }
+  
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        .menu-btn {
+          display: block;
+        }
+  
+        nav {
+          position: absolute;
+          top: 65px;
+          right: 0;
+          background: rgba(34, 139, 34, 0.95);
+          flex-direction: column;
+          width: 100%;
+          display: none;
+          padding: 20px 0;
+          transition: all 0.3s ease-in-out;
+        }
+  
+        nav.active {
+          display: flex;
+        }
+  
+        nav ul {
+          flex-direction: column;
+          gap: 20px;
+        }
+  
+        nav ul li {
+          text-align: center;
+        }
+      }
+  
+      /* Add content space below navbar */
+      .content {
+        padding-top: 90px;
+      }
+  
+      /* Sticky Navbar */
+      .sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      footer {
+        background-image: url('./pics/DEER.jpg');
+        background-size: cover;
+        background-position: center;
+        padding: 40px 0;
+        color: white;
+        border-top: 4px solid #010101;
+      }
+
+      footer .container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 40px 20px;
+        border-radius: 10px;
+      }
+
+      footer .container div {
+        flex: 1;
+        min-width: 250px;
+        padding: 20px;
+      }
+
+      footer .container img {
+        width: 150px;
+        margin-bottom: 15px;
+      }
+
+      footer .container h3 {
+        margin-bottom: 15px;
+      }
+
+      footer .container p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      footer a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      footer a:hover {
+        color: yellow;
+      }
+
+      footer .footer-bottom {
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;
+      }
+  </style>
+
+<header id="navbar">
+  <a href="index.html" class="logo-container">
+      <div class="logo">
+          <img src="logo/CENTRAL ZOO LOGO.png" alt="Logo">
+      </div>
+      <div class="logo-text">Central Zoo</div>
+  </a>
+  <i class="fas fa-bars menu-btn" onclick="toggleMenu()"></i>
+  <nav id="nav-menu">
+      <ul>
+          <li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+          <li><a href="/aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="/events.html"><i class="fas fa-calendar"></i> Events</a></li>
+          <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+<li><a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a></li>
+
+      </ul>
+  </nav>
+</header>
+
+<script>
+// Toggle menu for mobile
+function toggleMenu() {
+  document.getElementById('nav-menu').classList.toggle('active');
+}
+
+// Sticky Navbar on scroll
+const navbar = document.getElementById("navbar");
+const sticky = navbar.offsetTop;
+
+window.onscroll = function() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky");
+  } else {
+    navbar.classList.remove("sticky");
+  }
+};
+</script>
+
+<style>
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+background: #e8f5e9;
+font-size: 16px;
+line-height: 1.6;
+}
+
+/* NAVBAR */
+header {
+width: 100%;
+position: fixed;
+top: 0;
+left: 0;
+background: rgba(34, 139, 34, 0.8); 
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px 30px;
+z-index: 999;
+backdrop-filter: blur(5px);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+
+.logo img {
+width: 40px;
+height: 40px;
+margin-right: 10px;
+}
+
+.logo-text {
+color: white;
+font-size: 24px;
+font-weight: bold;
+text-decoration: none;
+}
+
+nav {
+display: flex;
+align-items: center;
+}
+
+nav ul {
+list-style: none;
+display: flex;
+gap: 30px;
+}
+
+nav ul li a {
+text-decoration: none;
+color: white;
+font-size: 16px;
+font-weight: 500;
+transition: color 0.3s;
+}
+
+nav ul li a:hover {
+color: yellow;
+}
+
+.menu-btn {
+display: none;
+font-size: 26px;
+color: white;
+cursor: pointer;
+}
+
+@media (max-width: 768px) {
+.menu-btn {
+  display: block;
+}
+
+nav {
+  position: absolute;
+  top: 65px;
+  right: 0;
+  background: rgba(34, 139, 34, 0.95);
+  flex-direction: column;
+  width: 100%;
+  display: none;
+  padding: 20px 0;
+  transition: all 0.3s ease-in-out;
+}
+
+nav.active {
+  display: flex;
+}
+
+nav ul {
+  flex-direction: column;
+  gap: 20px;
+}
+
+nav ul li {
+  text-align: center;
+}
+}
+</style>
+</head>
+
+<br>
+<br>
+
+<body>
+    <div class="cards-container">
+        <div class="card">
+          <img src="./PAGE 2/panda.jpeg" alt="Panda" />
+          <div class="card-body">
+            <h3>Panda</h3>
+            <p>
+              Pandas live mainly in temperate forests high in the mountains of
+              southwest China, where they subsist almost entirely on bamboo. They
+              must eat around 26 to 84 pounds of it every day, depending on what
+              part of the bamboo they are eating. Pandas use their enlarged wrist
+              bones that function as opposable thumbs, which help them hold bamboo
+              while eating. Despite being classified as carnivores, their diet is
+              over 99% bamboo. They are shy, solitary creatures and a symbol of
+              wildlife conservation worldwide.
+            </p>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img src="PAGE 2/lion.jpeg" alt="Lion" />
+          <div class="card-body">
+            <h3>Lion</h3>
+            <p>
+              Lions are powerful predators known as "kings of the jungle." They
+              are large, muscular cats with distinctive manes (males) and a
+              yellowish-brown coat. Lions live in social groups called prides,
+              which consist of related females and a few adult males. They use
+              teamwork to hunt large prey such as antelope, zebras, and buffalo.
+              Lions primarily live in the grasslands and savannas of Africa. Their
+              roar can be heard up to five miles away and is used to communicate
+              with pride members and defend territory.
+            </p>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img src="PAGE 2/Zebra.jpg" alt="Zebra" />
+          <div class="card-body">
+            <h3>Zebra</h3>
+            <p>
+              Zebras are distinctive African equids (members of the horse family)
+              known for their unique black and white stripes. Each zebra has a
+              unique pattern of stripes, much like human fingerprints. Zebras are
+              herbivores and primarily graze on grasses. They are social animals
+              that live in groups called harems or herds. These animals are
+              constantly alert for predators like lions and hyenas. Zebras use
+              their sharp eyesight and strong kicks as defense mechanisms, and
+              they can run up to 65 km/h when threatened.
+            </p>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img src="PAGE 2/monkey.jpg" alt="Monkey" />
+          <div class="card-body">
+            <h3>Monkey</h3>
+            <p>
+              Monkeys are primates known for their intelligence, agility, and
+              social behavior. They live in troops or groups and communicate using
+              various vocalizations, facial expressions, and gestures. Monkeys are
+              generally omnivores, feeding on fruits, insects, leaves, and small
+              animals. They are known to use tools, solve problems, and display
+              emotions similar to humans. Monkeys inhabit a wide range of
+              environments, from tropical forests to savannas. Their playful
+              nature and expressive faces make them one of the most relatable
+              animals to humans.
+            </p>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img src="PAGE 2/horse.jpg" alt="Horse" />
+          <div class="card-body">
+            <h3>Horse</h3>
+            <p>
+              Horses are majestic and powerful animals that have played a
+              significant role in human history. They have been used for
+              transportation, agriculture, and warfare for centuries. Horses are
+              known for their speed, strength, and gentle temperament. They can
+              form strong bonds with humans and are used in therapeutic programs,
+              sports like racing and show jumping, and as loyal companions. Horses
+              are herbivores and graze on grass and hay. Their social nature makes
+              them thrive in herds, where they establish complex social
+              structures.
+            </p>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img src="PAGE 2/elephants.jpg" alt="Elephant" />
+          <div class="card-body">
+            <h3>Elephant</h3>
+            <p>
+              Elephants are the largest land animals on Earth, recognized for
+              their massive bodies, large ears, and long trunks. They use their
+              trunks for drinking, picking up objects, social bonding, and even
+              greeting others. Elephants are intelligent creatures with strong
+              memories and emotions. They are herbivores, feeding on leaves, bark,
+              fruit, and roots. Elephants live in matriarchal herds led by the
+              oldest female and form close-knit social groups. They play a
+              critical role in shaping their ecosystems by digging for water and
+              spreading seeds.
+            </p>
+          </div>
+        </div>
+
+      </div>
+ 
+      <br>
+      <br>
+
+     <!-- Footer Start -->
+<footer style="background-image: url('./pics/DEER.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 40px 0; font-family: Arial, sans-serif; color: #ffffff; border-top: 4px solid #000000;">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background-color: rgba(0, 0, 0, 0.4); padding: 40px 20px; border-radius: 10px;">
+    
+    <!-- Logo and Description -->
+    <div style="flex: 1; min-width: 250px; padding: 20px;">
+      <img src="logo/CENTRAL ZOO LOGO.png" alt="Central Zoo Logo" style="width: 150px; margin-bottom: 15px;">
+      <p style="font-size: 14px; line-height: 1.6; color: #fff;">
+        Central Zoo is a premier wildlife sanctuary offering immersive experiences with diverse fauna. Join us for unforgettable adventures and educational programs.
+      </p>
+    </div>
+
+    
+    <!-- Quick Links -->
+<div class="footer-box" style="flex: 1; min-width: 200px; padding: 20px;">
+  <h3 style="margin-bottom: 15px; color: #fff;">&nbsp; &nbsp; Quick Links</h3>
+  <ul class="quick-links-list">
+    <li><a href="./index.html"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="./aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+    <li><a href="./gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+    <li><a href="./events.html"><i class="fas fa-calendar"></i> Events</a></li>
+    <li><a href="./contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+    <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+<li><a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a></li>
+
+  </ul>
+</div>
+
+
+    <!-- Contact Info -->
+    <div style="flex: 1; min-width: 250px; padding: 20px;">
+      <h3 style="margin-bottom: 15px; color: #fff;">Contact Us</h3>
+      <p style="font-size: 14px; line-height: 1.6; color: #fff;">
+        📍 123 Safari Lane, Karachi, Pakistan<br>
+        📞 +92 123 4567890<br>
+        📧 info@Centralzoo.pk
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div style="text-align: center; padding: 20px; margin-top: 20px;">
+    <p style="font-size: 14px; color: #fff;">&copy; 2025 Central Zoo. All rights reserved.</p>
+  </div>
+</footer>
+<!-- Footer End -->
+
+<style>
+  .quick-links-list {
+    list-style: disc inside;
+    padding-left: 20px;
+  }
+
+  .quick-links-list li {
+    margin-bottom: 10px; 
+  }
+
+  .quick-links-list li::marker {
+    color: white;
+    transition: color 0.3s ease;
+  }
+
+  .quick-links-list li:hover::marker {
+    color: yellow;
+  }
+
+  .quick-links-list li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .quick-links-list li a:hover {
+    color: yellow;
+  }
+</style>
+
+
+
+</body>
+</html>

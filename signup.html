@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/HOME.CSS">
+  <link rel="icon" type="image/x-icon" href="./logo/CENTRAL ZOO LOGO.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #e8f5e9;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    header {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(34, 139, 34, 0.8); /* transparent forest green */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      z-index: 999;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: yellow;
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 26px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .menu-btn {
+        display: block;
+      }
+
+      nav {
+        position: absolute;
+        top: 65px;
+        right: 0;
+        background: rgba(34, 139, 34, 0.95);
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        padding: 20px 0;
+        transition: all 0.3s ease-in-out;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      nav ul li {
+        text-align: center;
+      }
+    }
+
+    /* Add content space below navbar */
+    .content {
+      padding-top: 90px;
+    }
+
+    /* Sticky Navbar */
+    .sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+      background-image: url('./pics/DEER.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 40px 0;
+      color: white;
+      border-top: 4px solid #010101;
+    }
+
+    footer .container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 40px 20px;
+      border-radius: 10px;
+    }
+
+    footer .container div {
+      flex: 1;
+      min-width: 250px;
+      padding: 20px;
+    }
+
+    footer .container img {
+      width: 150px;
+      margin-bottom: 15px;
+    }
+
+    footer .container h3 {
+      margin-bottom: 15px;
+    }
+
+    footer .container p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: yellow;
+    }
+
+    footer .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+    }
+</style>
+
+<header id="navbar">
+<a href="index.html" class="logo-container">
+    <div class="logo">
+        <img src="logo/CENTRAL ZOO LOGO.png" alt="Logo">
+    </div>
+    <div class="logo-text">Central Zoo</div>
+</a>
+<i class="fas fa-bars menu-btn" onclick="toggleMenu()"></i>
+<nav id="nav-menu">
+    <ul>
+        <li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="/aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li><a href="/events.html"><i class="fas fa-calendar"></i> Events</a></li>
+        <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        <li><a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a></li>
+        
+    </ul>
+</nav>
+</header>
+
+<script>
+// Toggle menu for mobile
+function toggleMenu() {
+  document.getElementById('nav-menu').classList.toggle('active');
+}
+
+// Sticky Navbar on scroll
+const navbar = document.getElementById("navbar");
+const sticky = navbar.offsetTop;
+
+window.onscroll = function() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky");
+  } else {
+    navbar.classList.remove("sticky");
+  }
+};
+</script>
+
+<style>
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+background: #e8f5e9;
+font-size: 16px;
+line-height: 1.6;
+}
+
+/* NAVBAR */
+header {
+width: 100%;
+position: fixed;
+top: 0;
+left: 0;
+background: rgba(34, 139, 34, 0.8); 
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px 30px;
+z-index: 999;
+backdrop-filter: blur(5px);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+
+.logo img {
+width: 40px;
+height: 40px;
+margin-right: 10px;
+}
+
+.logo-text {
+color: white;
+font-size: 24px;
+font-weight: bold;
+text-decoration: none;
+}
+
+nav {
+display: flex;
+align-items: center;
+}
+
+nav ul {
+list-style: none;
+display: flex;
+gap: 30px;
+}
+
+nav ul li a {
+text-decoration: none;
+color: white;
+font-size: 16px;
+font-weight: 500;
+transition: color 0.3s;
+}
+
+nav ul li a:hover {
+color: yellow;
+}
+
+.menu-btn {
+display: none;
+font-size: 26px;
+color: white;
+cursor: pointer;
+}
+
+@media (max-width: 768px) {
+.menu-btn {
+display: block;
+}
+
+nav {
+position: absolute;
+top: 65px;
+right: 0;
+background: rgba(34, 139, 34, 0.95);
+flex-direction: column;
+width: 100%;
+display: none;
+padding: 20px 0;
+transition: all 0.3s ease-in-out;
+}
+
+nav.active {
+display: flex;
+}
+
+nav ul {
+flex-direction: column;
+gap: 20px;
+}
+
+nav ul li {
+text-align: center;
+}
+}
+</style>
+</head>
+
+<br>
+<br>
+
+<style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: url('./pics/hedgehog.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 0 20px rgba(0, 64, 0, 0.3);
+    }
+
+    .left-panel {
+      width: 40%;
+      background-color: forestgreen;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .left-panel h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .left-panel p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .left-panel button {
+      padding: 10px 20px;
+      border: 2px solid white;
+      color: forestgreen;
+      background-color: white;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .left-panel button:hover {
+      background-color: #e6ffe6;
+    }
+
+    .right-panel {
+      width: 60%;
+      padding: 40px;
+      position: relative;
+    }
+
+    .right-panel h2 {
+      color: forestgreen;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .btn-signup {
+      width: 100%;
+      padding: 12px;
+      background-color: forestgreen;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-signup:hover {
+      background-color: #145214;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      text-decoration: none;
+      color: forestgreen;
+      font-size: 22px;
+      transition: 0.2s;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left-panel, .right-panel {
+        width: 100%;
+      }
+
+      .left-panel {
+        padding: 20px;
+      }
+
+      .right-panel {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <h2>Welcome Back!</h2>
+      <p>Already have an account?</p>
+      <button onclick="window.location.href='login.html'">Login</button>
+    </div>
+
+    <div class="right-panel">
+      <h2>Register</h2>
+      <form id="signupForm">
+        <div class="input-group">
+          <input type="text" id="name" placeholder="Full Name" required />
+        </div>
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Email Address" required />
+        </div>
+        <div class="input-group">
+          <input type="password" id="password" placeholder="Create Password" required />
+        </div>
+        <button type="submit" class="btn-signup">Sign Up</button>
+      </form>
+      <div class="social-icons">
+        <a href="https://accounts.google.com/" target="_blank"><i class="fab fa-google"></i></a>
+        <a href="https://facebook.com/signup" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/signup" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (name !== "" && email !== "" && password !== "") {
+        alert("Signup successful!");
+      } else {
+        alert("Please fill in all fields correctly.");
+      }
+    });
+  </script>
+  
+
+ 
+  
+</body>
+</html>
+
+

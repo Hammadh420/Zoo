@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Central Zoo</title>
+  <link rel="icon" type="image/x-icon" href="./logo/CENTRAL ZOO LOGO.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background: #e8f5e9;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    header {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(34, 139, 34, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      z-index: 999;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+    .logo-text {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: yellow;
+    }
+    .menu-btn {
+      display: none;
+      font-size: 26px;
+      color: white;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .menu-btn {
+        display: block;
+      }
+      nav {
+        position: absolute;
+        top: 65px;
+        right: 0;
+        background: rgba(34, 139, 34, 0.95);
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        padding: 20px 0;
+      }
+      nav.active {
+        display: flex;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 20px;
+      }
+      nav ul li {
+        text-align: center;
+      }
+    }
+
+    .content {
+      padding-top: 100px;
+    }
+
+    /* ABOUT US SECTION */
+    .about-section {
+      padding: 60px 20px;
+      background: url('./pics/memmals.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+    }
+    .about-overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 60px 20px;
+      border-radius: 15px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .about-section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: yellow;
+    }
+    .about-section p {
+      font-size: 18px;
+      margin-bottom: 40px;
+      color: #ddd;
+    }
+    .about-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .stat-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      width: 180px;
+      transition: transform 0.3s ease;
+      animation: fadeInUp 1s ease both;
+    }
+    .stat-box:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .stat-box i {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: yellow;
+    }
+    .stat-box h3 {
+      font-size: 20px;
+      color: white;
+    }
+
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    /* SERVICES */
+    .facility i {
+    font-size: 36px;
+    color: #28a745;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+  }
+
+  .facility:hover i {
+    transform: scale(1.2); /* Zoom in when hovered */
+    color: yellow; /* Optional: Change color when hovered */
+  }
+    
+    .our-services-section {
+      text-align: center;
+      padding: 50px 20px 20px;
+    }
+    .service-heading {
+      font-size: 36px;
+      color: #2e7d32;
+      margin-bottom: 30px;
+    }
+    .facilities-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .facility {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      animation: fadeInUp 1s ease both;
+    }
+    .facility i {
+      font-size: 36px;
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+    .facility h3 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .facility p {
+      font-size: 14px;
+      color: #666;
+    }
+    .facility:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* FOOTER */
+    footer {
+      background-image: url('./pics/DEER.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 40px 0;
+      color: #ffffff;
+      border-top: 4px solid #000;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 40px 20px;
+      border-radius: 10px;
+    }
+    .footer-box {
+      flex: 1;
+      min-width: 250px;
+      padding: 20px;
+    }
+    .footer-box img {
+      width: 150px;
+      margin-bottom: 15px;
+    }
+    .footer-box h3 {
+      margin-bottom: 15px;
+    }
+    .footer-box ul {
+  list-style: disc inside;
+  padding-left: 0;
+}
+.footer-box ul li {
+  margin-bottom: 8px;
+}
+.footer-box ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  padding-left: 5px;
+}
+.footer-box ul li a:hover {
+  color: yellow;
+}
+
+
+    @media (max-width: 768px) {
+      .about-stats {
+        flex-direction: column;
+        align-items: center;
+      }
+      .stat-box {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <header id="navbar">
+    <a href="index.html" class="logo-container">
+      <div class="logo">
+        <img src="logo/CENTRAL ZOO LOGO.png" alt="Logo">
+      </div>
+      <div class="logo-text">Central Zoo</div>
+    </a>
+    <i class="fas fa-bars menu-btn" onclick="toggleMenu()"></i>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li><a href="events.html"><i class="fas fa-calendar"></i> Events</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+<li><a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <div class="content">
+    <section class="about-section">
+      <div class="about-overlay">
+        <h2>About Us</h2>
+        <p>
+          CENTRAL Zoo is one of the biggest zoos in the town. The land area of the zoo is 33 acres. CENTRAL Zoo was established in 1980 with 10-acre land, but it was later expanded in 2000. Proper residing space for all types of animals has been made and human security is maintained at a high rate. Food supply for animals is checked regularly.
+        </p>
+        <div class="about-stats">
+          <div class="stat-box">
+            <i class="fas fa-tree"></i>
+            <h3><span class="counter" data-target="33">0</span> Acres</h3>
+          </div>
+          <div class="stat-box">
+            <i class="fas fa-calendar-alt"></i>
+            <h3>Since <span class="counter" data-target="1980">0</span></h3>
+          </div>
+          <div class="stat-box">
+            <i class="fas fa-paw"></i>
+            <h3><span class="counter" data-target="400">0</span>+ Animals</h3>
+          </div>
+          <div class="stat-box">
+            <i class="fas fa-user-shield"></i>
+            <h3>100% Secure</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="our-services-section">
+      <h1 class="service-heading">Our Services</h1>
+    </section>
+
+    <section class="facilities-section">
+      <div class="facility"><i class="fas fa-store"></i><h3>Zoo Shopping</h3><p>Explore toys, snacks, and souvenirs to enhance your visit!</p></div>
+      <div class="facility"><i class="fas fa-wifi"></i><h3>Free Wi-Fi</h3><p>Stay connected with fast WiFi throughout the zoo.</p></div>
+      <div class="facility"><i class="fas fa-child"></i><h3>Play Ground</h3><p>Kids enjoy safe and fun play areas.</p></div>
+      <div class="facility"><i class="fas fa-bed"></i><h3>Rest House</h3><p>Relax and recharge at our peaceful rest houses.</p></div>
+      <div class="facility"><i class="fas fa-parking"></i><h3>Car Parking</h3><p>Secure parking for a worry-free visit.</p></div>
+      <div class="facility"><i class="fas fa-camera-retro"></i><h3>Animal Photos</h3><p>Capture amazing animal moments with pro help.</p></div>
+      <div class="facility"><i class="fas fa-map-marked-alt"></i><h3>Guide Services</h3><p>Learn with friendly guides during your tour.</p></div>
+      <div class="facility"><i class="fas fa-utensils"></i><h3>Food & Beverages</h3><p>Delicious food and drinks at every corner.</p></div>
+    </section>
+
+   <!-- Footer Start -->
+<footer style="background-image: url('./pics/DEER.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 40px 0; font-family: Arial, sans-serif; color: #ffffff; border-top: 4px solid #000000;">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background-color: rgba(0, 0, 0, 0.4); padding: 40px 20px; border-radius: 10px;">
+    
+    <!-- Logo and Description -->
+    <div style="flex: 1; min-width: 250px; padding: 20px;">
+      <img src="logo/CENTRAL ZOO LOGO.png" alt="Central Zoo Logo" style="width: 150px; margin-bottom: 15px;">
+      <p style="font-size: 14px; line-height: 1.6; color: #fff;">
+        Central Zoo is a premier wildlife sanctuary offering immersive experiences with diverse fauna. Join us for unforgettable adventures and educational programs.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-box" style="flex: 1; min-width: 200px; padding: 20px;">
+      <h3 style="margin-bottom: 15px; color: #fff;">Quick Links</h3>
+      <ul class="quick-links-list">
+        <li><a href="./index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="./aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li><a href="./gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="./events.html"><i class="fas fa-calendar"></i> Events</a></li>
+        <li><a href="./contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+<li><a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a></li>
+
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div style="flex: 1; min-width: 250px; padding: 20px;">
+      <h3 style="margin-bottom: 15px; color: #fff;">Contact Us</h3>
+      <p style="font-size: 14px; line-height: 1.6; color: #fff;">
+        📍 123 Safari Lane, Karachi, Pakistan<br>
+        📞 +92 123 4567890<br>
+        📧 info@Centralzoo.pk
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div style="text-align: center; padding: 20px; margin-top: 20px;">
+    <p style="font-size: 14px; color: #fff;">&copy; 2025 Central Zoo. All rights reserved.</p>
+  </div>
+</footer>
+<!-- Footer End -->
+
+<!-- Bullet List Styling -->
+<style>
+  .quick-links-list {
+    list-style: disc inside;
+    padding-left: 20px;
+  }
+
+  .quick-links-list li::marker {
+    color: white;
+    transition: color 0.3s ease;
+  }
+
+  .quick-links-list li:hover::marker {
+    color: yellow;
+  }
+
+  .quick-links-list li a {
+    color: white;
+    text-decoration: none;
+    padding-left: 5px;
+    transition: color 0.3s;
+  }
+
+  .quick-links-list li a:hover {
+    color: white;
+  }
+</style>
+
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('nav-menu').classList.toggle('active');
+    }
+
+    window.onscroll = function() {
+      const navbar = document.getElementById("navbar");
+      if (window.pageYOffset > 20) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    };
+
+    const counters = document.querySelectorAll(".counter");
+    const options = { threshold: 0.5 };
+    const animate = (counter) => {
+      const update = () => {
+        const target = +counter.getAttribute("data-target");
+        const count = +counter.innerText;
+        const increment = target / 50;
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          setTimeout(update, 30);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      update();
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animate(entry.target);
+        }
+      });
+    }, options);
+    counters.forEach((counter) => observer.observe(counter));
+  </script>
+</body>
+</html>

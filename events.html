@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Zoo - Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/HOME.CSS">
+    <link rel="icon" type="image/x-icon" href="./logo/CENTRAL ZOO LOGO.png">
+    
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+      }
+  
+      body {
+        background: #e8f5e9;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+  
+      /* NAVBAR */
+      header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(34, 139, 34, 0.8); /* transparent forest green */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        z-index: 999;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+  
+      .logo-container {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+  
+      .logo img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+  
+      .logo-text {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+  
+      nav {
+        display: flex;
+        align-items: center;
+      }
+  
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+      }
+  
+      nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+  
+      nav ul li a:hover {
+        color: yellow;
+      }
+  
+      .menu-btn {
+        display: none;
+        font-size: 26px;
+        color: white;
+        cursor: pointer;
+      }
+  
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        .menu-btn {
+          display: block;
+        }
+  
+        nav {
+          position: absolute;
+          top: 65px;
+          right: 0;
+          background: rgba(34, 139, 34, 0.95);
+          flex-direction: column;
+          width: 100%;
+          display: none;
+          padding: 20px 0;
+          transition: all 0.3s ease-in-out;
+        }
+  
+        nav.active {
+          display: flex;
+        }
+  
+        nav ul {
+          flex-direction: column;
+          gap: 20px;
+        }
+  
+        nav ul li {
+          text-align: center;
+        }
+      }
+  
+      /* Add content space below navbar */
+      .content {
+        padding-top: 90px;
+      }
+  
+      /* Sticky Navbar */
+      .sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      /* EVENTS */
+      .events-header {
+        text-align: center;
+        padding: 80px 20px;
+      }
+
+      .events-header h1 {
+        font-size: 36px;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .events-header p {
+        font-size: 18px;
+        color: #555;
+      }
+
+      /* Event Cards */
+      .events-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 30px;
+        margin: 40px 20px;
+      }
+
+      .event-card {
+        width: 350px;  /* Increased the card size */
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .event-card img {
+        width: 100%;
+        height: 250px;  /* Increased the image size */
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .event-details {
+        padding: 20px;
+      }
+
+      .event-details h2 {
+        font-size: 24px;  /* Increased font size */
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .event-details .event-date {
+        font-size: 18px;  /* Adjusted font size */
+        color: #8e8e8e;
+        margin-bottom: 15px;
+      }
+
+      .event-details p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      /* Card Hover Animation */
+      .event-card:hover {
+        transform: scale(1.05);  /* Scales the card */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Testimonial Section */
+      .testimonial-item img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+      }
+
+      .testimonial-item p {
+        font-size: 18px;
+        color: #555;
+        max-width: 800px;
+        margin: 0 auto 10px;
+      }
+
+      .testimonial-item h4 {
+        color: #2c3e50;
+      }
+
+      .testimonial-item span {
+        color: #999;
+      }
+
+      /* Footer */
+      footer {
+        background-image: url('./pics/DEER.jpg');
+        background-size: cover;
+        background-position: center;
+        padding: 40px 0;
+        color: white;
+        border-top: 4px solid #010101;
+      }
+
+      footer .container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 40px 20px;
+        border-radius: 10px;
+      }
+
+      footer .container div {
+        flex: 1;
+        min-width: 250px;
+        padding: 20px;
+      }
+
+      footer .container img {
+        width: 150px;
+        margin-bottom: 15px;
+      }
+
+      footer .container h3 {
+        margin-bottom: 15px;
+      }
+
+      footer .container p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      footer a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      footer a:hover {
+        color: yellow;
+      }
+
+      footer .footer-bottom {
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;
+      }
+    </style>
+</head>
+
+<body>
+    <header id="navbar">
+        <a href="index.html" class="logo-container">
+            <div class="logo">
+                <img src="logo/CENTRAL ZOO LOGO.png" alt="Logo">
+            </div>
+            <div class="logo-text">Central Zoo</div>
+        </a>
+        <i class="fas fa-bars menu-btn" onclick="toggleMenu()"></i>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="/aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="/events.html"><i class="fas fa-calendar"></i> Events</a></li>
+                <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <script>
+      // Toggle menu for mobile
+      function toggleMenu() {
+        document.getElementById('nav-menu').classList.toggle('active');
+      }
+
+      // Sticky Navbar on scroll
+      const navbar = document.getElementById("navbar");
+      const sticky = navbar.offsetTop;
+
+      window.onscroll = function() {
+        if (window.pageYOffset >= sticky) {
+          navbar.classList.add("sticky");
+        } else {
+          navbar.classList.remove("sticky");
+        }
+      };
+    </script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+      }
+  
+      body {
+        background: #e8f5e9;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      /* NAVBAR */
+      header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(34, 139, 34, 0.8); 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        z-index: 999;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+  
+      .logo-container {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+  
+      .logo img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+  
+      .logo-text {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+  
+      nav {
+        display: flex;
+        align-items: center;
+      }
+  
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+      }
+  
+      nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+  
+      nav ul li a:hover {
+        color: yellow;
+      }
+  
+      .menu-btn {
+        display: none;
+        font-size: 26px;
+        color: white;
+        cursor: pointer;
+      }
+  
+      @media (max-width: 768px) {
+        .menu-btn {
+          display: block;
+        }
+  
+        nav {
+          position: absolute;
+          top: 65px;
+          right: 0;
+          background: rgba(34, 139, 34, 0.95);
+          flex-direction: column;
+          width: 100%;
+          display: none;
+          padding: 20px 0;
+          transition: all 0.3s ease-in-out;
+        }
+  
+        nav.active {
+          display: flex;
+        }
+  
+        nav ul {
+          flex-direction: column;
+          gap: 20px;
+        }
+  
+        nav ul li {
+          text-align: center;
+        }
+      }
+
+      /* Adjusted Events Section */
+      .events-header {
+        text-align: center;
+        padding: 40px 20px;
+        margin-top: 100px;
+      }
+
+      .events-header h1 {
+        font-size: 36px;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .events-header p {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 30px;
+      }
+
+      /* Event List Section */
+      .events-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 0 20px 20px;
+        justify-items: center;
+      }
+
+      .event-card {
+        background: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        width: 100%;
+        max-width: 450px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .event-card:hover {
+        transform: scale(1.05);
+      }
+
+      .event-card img {
+        width: 100%;
+        height: 250px; /* Adjusted height */
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .event-details {
+        padding: 20px;
+      }
+
+      .event-details h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #2c3e50;
+      }
+
+      .event-details p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 15px;
+      }
+
+      .event-date {
+        font-size: 14px;
+        color: #999;
+        margin-bottom: 15px;
+      }
+
+      /* Responsive for smaller screens */
+      @media (max-width: 768px) {
+        .events-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+</head>
+
+<body>
+    <header id="navbar">
+        <a href="index.html" class="logo-container">
+            <div class="logo">
+                <img src="logo/CENTRAL ZOO LOGO.png" alt="Logo">
+            </div>
+            <div class="logo-text">Central Zoo</div>
+        </a>
+        <i class="fas fa-bars menu-btn" onclick="toggleMenu()"></i>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="/aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="/events.html"><i class="fas fa-calendar"></i> Events</a></li>
+                <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+<li><a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Events Header Section -->
+    <section class="events-header">
+        <h1>Exciting Events at Zoo Park</h1>
+        <p>Join us for fun, educational, and unique experiences at Zoo Park.</p>
+    </section>
+
+    <!-- Events List Section -->
+    <section style="padding: 60px 0; background-color: #f4f4f4; text-align: center;">
+      <h2 style="font-size: 36px; color: forestgreen; margin-bottom: 40px;">Upcoming Zoo Events</h2>
+    
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+    
+        <!-- Event 1 -->
+        <div class="event-card" style="width: 300px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+          <img src="PAGE 2/World Wildlife Day.jpg" alt="World Wildlife Day" style="width: 100%; border-radius: 15px;">
+          <h3 style="color: forestgreen; margin-top: 15px;">World Wildlife Day</h3>
+          <p class="event-desc" style="display: none; margin-top: 10px; color: #555;">Celebrate wildlife with rare animal exhibits, live shows, and educational booths.</p>
+          <button onclick="toggleDescription(this)" style="margin-top: 10px; padding: 8px 15px; background-color: forestgreen; color: white; border: none; border-radius: 5px;">Read More</button>
+        </div>
+    
+        <!-- Event 2 -->
+        <div class="event-card" style="width: 300px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+          <img src="PAGE 2/Safari Night.jpg" alt="Safari Night" style="width: 100%; border-radius: 15px;">
+          <h3 style="color: forestgreen; margin-top: 15px;">Safari Night</h3>
+          <p class="event-desc" style="display: none; margin-top: 10px; color: #555;">Enjoy guided night tours, animal behavior shows, and glowing jungle decor.</p>
+          <button onclick="toggleDescription(this)" style="margin-top: 10px; padding: 8px 15px; background-color: forestgreen; color: white; border: none; border-radius: 5px;">Read More</button>
+        </div>
+    
+        <!-- Event 3 -->
+        <div class="event-card" style="width: 300px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+          <img src="PAGE 2/Animal Adoption Fair.jpg" alt="Animal Adoption Fair" style="width: 100%; border-radius: 15px;">
+          <h3 style="color: forestgreen; margin-top: 15px;">Animal Adoption Fair</h3>
+          <p class="event-desc" style="display: none; margin-top: 10px; color: #555;">Support conservation by adopting animals. Get photo ops & meet the keepers.</p>
+          <button onclick="toggleDescription(this)" style="margin-top: 10px; padding: 8px 15px; background-color: forestgreen; color: white; border: none; border-radius: 5px;">Read More</button>
+        </div>
+    
+        <!-- Event 4 -->
+        <div class="event-card" style="width: 300px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+          <img src="PAGE 2/Zoo Anniversary Gala.jpg" alt="Zoo Anniversary Gala" style="width: 100%; border-radius: 15px;">
+          <h3 style="color: forestgreen; margin-top: 15px;">Zoo Anniversary Gala</h3>
+          <p class="event-desc" style="display: none; margin-top: 10px; color: #555;">Celebrate our birthday with fireworks, performances, and history exhibits.</p>
+          <button onclick="toggleDescription(this)" style="margin-top: 10px; padding: 8px 15px; background-color: forestgreen; color: white; border: none; border-radius: 5px;">Read More</button>
+        </div>
+    
+        <!-- Event 5 -->
+        <div class="event-card" style="width: 300px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+          <img src="PAGE 2/Reptile Encounter.jpg" alt="Reptile Encounter" style="width: 100%; border-radius: 15px;">
+          <h3 style="color: forestgreen; margin-top: 15px;">Reptile Encounter</h3>
+          <p class="event-desc" style="display: none; margin-top: 10px; color: #555;">Get up close with snakes, lizards, and crocodiles in a safe environment.</p>
+          <button onclick="toggleDescription(this)" style="margin-top: 10px; padding: 8px 15px; background-color: forestgreen; color: white; border: none; border-radius: 5px;">Read More</button>
+        </div>
+    
+        <!-- Event 6 -->
+        <div class="event-card" style="width: 300px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+          <img src="PAGE 2/Birds of Paradise Show.jpg" alt="Birds of Paradise Show" style="width: 100%; border-radius: 15px;">
+          <h3 style="color: forestgreen; margin-top: 15px;">Birds of Paradise Show</h3>
+          <p class="event-desc" style="display: none; margin-top: 10px; color: #555;">Watch exotic birds perform tricks and learn about their habitats and sounds.</p>
+          <button onclick="toggleDescription(this)" style="margin-top: 10px; padding: 8px 15px; background-color: forestgreen; color: white; border: none; border-radius: 5px;">Read More</button>
+        </div>
+    
+        <!-- Event 7 -->
+        <div class="event-card" style="width: 300px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+          <img src="PAGE 2/Children_s Day Festival.jpg" alt="Children's Day Festival" style="width: 100%; border-radius: 15px;">
+          <h3 style="color: forestgreen; margin-top: 15px;">Children's Day Festival</h3>
+          <p class="event-desc" style="display: none; margin-top: 10px; color: #555;">Games, mascots, face painting, and surprises for all kids at the zoo.</p>
+          <button onclick="toggleDescription(this)" style="margin-top: 10px; padding: 8px 15px; background-color: forestgreen; color: white; border: none; border-radius: 5px;">Read More</button>
+        </div>
+    
+        <!-- Event 8 -->
+        <div class="event-card" style="width: 300px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+          <img src="PAGE 2/Eco Awareness Day.jpg" alt="Eco Awareness Day" style="width: 100%; border-radius: 15px;">
+          <h3 style="color: forestgreen; margin-top: 15px;">Eco Awareness Day</h3>
+          <p class="event-desc" style="display: none; margin-top: 10px; color: #555;">Join volunteers in keeping the zoo clean and green, plus workshops for kids.</p>
+          <button onclick="toggleDescription(this)" style="margin-top: 10px; padding: 8px 15px; background-color: forestgreen; color: white; border: none; border-radius: 5px;">Read More</button>
+        </div>
+    
+      </div>
+    </section>
+    
+    <script>
+      function toggleDescription(btn) {
+        const desc = btn.previousElementSibling;
+        const isVisible = desc.style.display === "block";
+        desc.style.display = isVisible ? "none" : "block";
+        btn.textContent = isVisible ? "Read More" : "Read Less";
+      }
+    </script>
+        
+    <section style="padding: 60px 0; background-color: #f4f4f4; text-align: center;">
+      <h2 style="font-size: 36px; color: forestgreen; margin-bottom: 40px;">What Our Clients Say</h2>
+    
+      <div id="testimonial-container" style="display: flex; justify-content: center; position: relative; width: 100%; margin: 0 auto; overflow: hidden;">
+        <!-- Testimonial Cards -->
+        <div class="testimonial-cards" style="display: flex; transition: transform 0.5s ease;">
+    
+          <!-- Card 1 -->
+          <div class="testimonial-card" style="background: #fff; border-radius: 20px; padding: 30px 20px; width: 280px; box-shadow: 0 0 15px rgba(0,0,0,0.1); margin-right: 30px; transition: transform 0.3s ease;">
+            <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin: 0 auto 15px; border: 4px solid forestgreen;">
+              <img src="PAGE 2/person 1.jpg" alt="Client" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h3 style="font-size: 20px; margin: 10px 0 5px; color: forestgreen;">Sarah Khan</h3>
+            <p style="font-size: 15px; color: #555;">Central Zoo is a great place for family trips. Clean, safe, and educational!</p>
+          </div>
+    
+          <!-- Card 2 -->
+          <div class="testimonial-card" style="background: #fff; border-radius: 20px; padding: 30px 20px; width: 280px; box-shadow: 0 0 15px rgba(0,0,0,0.1); margin-right: 30px; transition: transform 0.3s ease;">
+            <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin: 0 auto 15px; border: 4px solid forestgreen;">
+              <img src="PAGE 2/person 3.jpg" alt="Client" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h3 style="font-size: 20px; margin: 10px 0 5px; color: forestgreen;">Ahmed Raza</h3>
+            <p style="font-size: 15px; color: #555;">A wonderful collection of animals and great staff. Highly recommend the safari tour!</p>
+          </div>
+    
+          <!-- Card 3 -->
+          <div class="testimonial-card" style="background: #fff; border-radius: 20px; padding: 30px 20px; width: 280px; box-shadow: 0 0 15px rgba(0,0,0,0.1); margin-right: 30px; transition: transform 0.3s ease;">
+            <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin: 0 auto 15px; border: 4px solid forestgreen;">
+              <img src="PAGE 2/person 2.jpg" alt="Client" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h3 style="font-size: 20px; margin: 10px 0 5px; color: forestgreen;">Mehwish Ali</h3>
+            <p style="font-size: 15px; color: #555;">My kids loved the experience! The best zoo in the city with great care for animals.</p>
+          </div>
+    
+          <!-- Card 4 -->
+          <div class="testimonial-card" style="background: #fff; border-radius: 20px; padding: 30px 20px; width: 280px; box-shadow: 0 0 15px rgba(0,0,0,0.1); margin-right: 30px; transition: transform 0.3s ease;">
+            <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin: 0 auto 15px; border: 4px solid forestgreen;">
+              <img src="https://i.pravatar.cc/100?img=12" alt="Client" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h3 style="font-size: 20px; margin: 10px 0 5px; color: forestgreen;">Ali Mustafa</h3>
+            <p style="font-size: 15px; color: #555;">Amazing place to learn about wildlife. Excellent staff and well-maintained zoo.</p>
+          </div>
+    
+          <!-- Card 5 -->
+          <div class="testimonial-card" style="background: #fff; border-radius: 20px; padding: 30px 20px; width: 280px; box-shadow: 0 0 15px rgba(0,0,0,0.1); margin-right: 30px; transition: transform 0.3s ease;">
+            <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin: 0 auto 15px; border: 4px solid forestgreen;">
+              <img src="https://i.pravatar.cc/100?img=19" alt="Client" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h3 style="font-size: 20px; margin: 10px 0 5px; color: forestgreen;">Fatima Noor</h3>
+            <p style="font-size: 15px; color: #555;">Central Zoo is the perfect weekend getaway. A peaceful and fun environment.</p>
+          </div>
+    
+        </div>
+      </div>
+    
+      <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <button id="prev" style="background-color: forestgreen; color: #fff; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px;">←</button>
+        <button id="next" style="background-color: forestgreen; color: #fff; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-left: 20px;">→</button>
+      </div>
+    </section>
+    
+    <script>
+      const testimonialContainer = document.querySelector('.testimonial-cards');
+      const testimonials = document.querySelectorAll('.testimonial-card');
+      let currentIndex = 0;
+    
+      // Set maximum index
+      const maxIndex = testimonials.length - 1;
+    
+      function updateHighlight() {
+        testimonials.forEach((card, index) => {
+          if (index === currentIndex) {
+            card.style.transform = 'scale(1.1)';
+            card.style.boxShadow = '0 0 20px rgba(0,0,0,0.3)';
+            card.style.filter = 'blur(0)';
+          } else {
+            card.style.transform = 'scale(1)';
+            card.style.boxShadow = '0 0 10px rgba(0,0,0,0.1)';
+            card.style.filter = 'blur(4px)';
+          }
+        });
+      }
+    
+      // Next Button
+      document.getElementById('next').addEventListener('click', () => {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+          updateHighlight(); // Update highlight for new card
+        }
+      });
+    
+      // Previous Button
+      document.getElementById('prev').addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateHighlight(); // Update highlight for new card
+        }
+      });
+    
+      // Initialize the first card as highlighted
+      updateHighlight();
+    </script>
+    
+<!-- Footer Start -->
+<footer style="background-image: url('./pics/DEER.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 40px 0; font-family: Arial, sans-serif; color: #ffffff; border-top: 4px solid #000000;">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background-color: rgba(0, 0, 0, 0.4); padding: 40px 20px; border-radius: 10px;">
+    
+    <!-- Logo and Description -->
+    <div style="flex: 1; min-width: 250px; padding: 20px;">
+      <img src="logo/CENTRAL ZOO LOGO.png" alt="Central Zoo Logo" style="width: 150px; margin-bottom: 15px;">
+      <p style="font-size: 14px; line-height: 1.6; color: #fff;">
+        Central Zoo is a premier wildlife sanctuary offering immersive experiences with diverse fauna. Join us for unforgettable adventures and educational programs.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-box" style="flex: 1; min-width: 200px; padding: 20px;">
+      <h3 style="margin-bottom: 15px; color: #fff;">&nbsp; &nbsp; Quick Links</h3>
+      <ul class="quick-links-list">
+        <li><a href="./index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="./aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li><a href="./gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="./events.html"><i class="fas fa-calendar"></i> Events</a></li>
+        <li><a href="./contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+<li><a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a></li>
+
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div style="flex: 1; min-width: 250px; padding: 20px;">
+      <h3 style="margin-bottom: 15px; color: #fff;">Contact Us</h3>
+      <p style="font-size: 14px; line-height: 1.6; color: #fff;">
+        📍 123 Safari Lane, Karachi, Pakistan<br>
+        📞 +92 123 4567890<br>
+        📧 info@Centralzoo.pk
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div style="text-align: center; padding: 20px; margin-top: 20px;">
+    <p style="font-size: 14px; color: #fff;">&copy; 2025 Central Zoo. All rights reserved.</p>
+  </div>
+</footer>
+<!-- Footer End -->
+
+<!-- Bullet List Styling -->
+<style>
+  .quick-links-list {
+    list-style: disc inside;
+    padding-left: 20px;
+  }
+
+  .quick-links-list li::marker {
+    color: white;
+    transition: color 0.3s ease;
+  }
+
+  .quick-links-list li:hover::marker {
+    color: yellow;
+  }
+
+  .quick-links-list li a {
+    color: white;
+    text-decoration: none;
+    padding-left: 5px;
+    transition: color 0.3s;
+  }
+
+  .quick-links-list li a:hover {
+    color: yellow;
+  }
+</style>
+
+</body>
+</html>

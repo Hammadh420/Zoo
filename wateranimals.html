@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water animals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/HOME.CSS">
+    <link rel="icon" type="image/x-icon" href="./logo/CENTRAL ZOO LOGO.png">
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+      }
+  
+      body {
+        background: #e8f5e9;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+  
+      /* NAVBAR */
+      header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(34, 139, 34, 0.8); /* transparent forest green */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        z-index: 999;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+  
+      .logo-container {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+  
+      .logo img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+  
+      .logo-text {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+  
+      nav {
+        display: flex;
+        align-items: center;
+      }
+  
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+      }
+  
+      nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+  
+      nav ul li a:hover {
+        color: yellow;
+      }
+  
+      .menu-btn {
+        display: none;
+        font-size: 26px;
+        color: white;
+        cursor: pointer;
+      }
+  
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        .menu-btn {
+          display: block;
+        }
+  
+        nav {
+          position: absolute;
+          top: 65px;
+          right: 0;
+          background: rgba(34, 139, 34, 0.95);
+          flex-direction: column;
+          width: 100%;
+          display: none;
+          padding: 20px 0;
+          transition: all 0.3s ease-in-out;
+        }
+  
+        nav.active {
+          display: flex;
+        }
+  
+        nav ul {
+          flex-direction: column;
+          gap: 20px;
+        }
+  
+        nav ul li {
+          text-align: center;
+        }
+      }
+  
+      /* Add content space below navbar */
+      .content {
+        padding-top: 90px;
+      }
+  
+      /* Sticky Navbar */
+      .sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      footer {
+        background-image: url('./pics/DEER.jpg');
+        background-size: cover;
+        background-position: center;
+        padding: 40px 0;
+        color: white;
+        border-top: 4px solid #010101;
+      }
+
+      footer .container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 40px 20px;
+        border-radius: 10px;
+      }
+
+      footer .container div {
+        flex: 1;
+        min-width: 250px;
+        padding: 20px;
+      }
+
+      footer .container img {
+        width: 150px;
+        margin-bottom: 15px;
+      }
+
+      footer .container h3 {
+        margin-bottom: 15px;
+      }
+
+      footer .container p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      footer a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      footer a:hover {
+        color: yellow;
+      }
+
+      footer .footer-bottom {
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;
+      }
+  </style>
+
+<header id="navbar">
+  <a href="index.html" class="logo-container">
+      <div class="logo">
+          <img src="logo/CENTRAL ZOO LOGO.png" alt="Logo">
+      </div>
+      <div class="logo-text">Central Zoo</div>
+  </a>
+  <i class="fas fa-bars menu-btn" onclick="toggleMenu()"></i>
+  <nav id="nav-menu">
+      <ul>
+          <li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+          <li><a href="/aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="/events.html"><i class="fas fa-calendar"></i> Events</a></li>
+          <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+<li><a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a></li>
+
+      </ul>
+  </nav>
+</header>
+
+<script>
+// Toggle menu for mobile
+function toggleMenu() {
+  document.getElementById('nav-menu').classList.toggle('active');
+}
+
+// Sticky Navbar on scroll
+const navbar = document.getElementById("navbar");
+const sticky = navbar.offsetTop;
+
+window.onscroll = function() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky");
+  } else {
+    navbar.classList.remove("sticky");
+  }
+};
+</script>
+
+<style>
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+background: #e8f5e9;
+font-size: 16px;
+line-height: 1.6;
+}
+
+/* NAVBAR */
+header {
+width: 100%;
+position: fixed;
+top: 0;
+left: 0;
+background: rgba(34, 139, 34, 0.8); 
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px 30px;
+z-index: 999;
+backdrop-filter: blur(5px);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+
+.logo img {
+width: 40px;
+height: 40px;
+margin-right: 10px;
+}
+
+.logo-text {
+color: white;
+font-size: 24px;
+font-weight: bold;
+text-decoration: none;
+}
+
+nav {
+display: flex;
+align-items: center;
+}
+
+nav ul {
+list-style: none;
+display: flex;
+gap: 30px;
+}
+
+nav ul li a {
+text-decoration: none;
+color: white;
+font-size: 16px;
+font-weight: 500;
+transition: color 0.3s;
+}
+
+nav ul li a:hover {
+color: yellow;
+}
+
+.menu-btn {
+display: none;
+font-size: 26px;
+color: white;
+cursor: pointer;
+}
+
+@media (max-width: 768px) {
+.menu-btn {
+  display: block;
+}
+
+nav {
+  position: absolute;
+  top: 65px;
+  right: 0;
+  background: rgba(34, 139, 34, 0.95);
+  flex-direction: column;
+  width: 100%;
+  display: none;
+  padding: 20px 0;
+  transition: all 0.3s ease-in-out;
+}
+
+nav.active {
+  display: flex;
+}
+
+nav ul {
+  flex-direction: column;
+  gap: 20px;
+}
+
+nav ul li {
+  text-align: center;
+}
+}
+</style>
+</head>
+
+<br>
+<br>
+
+</head>
+<body>
+    <div class="cards-container">
+        <div class="card">
+          <img src="/PAGE 2/DOLPHIN1.jpg" alt="dolphin" />
+          <div class="card-body">
+            <h3>Dolphin</h3>
+            <p>
+                They are socially skilled, intelligent, agile, joyful, and playful creatures that share many emotional similarities with humans. There is an impressive range of different species of dolphin and they all have their own unique identities and characteristics!Dolphins have smooth skin, flippers, and a dorsal fin. They have a long, slender snout with about 100 teeth, and a streamlined body. The single blowhole on top of their head has a flap that opens to reveal a pair of nostrils, which dolphins use for breathing when they surface.Their playful nature is a useful reminder of the importance of finding fun in everyday life and the beauty of connecting with natureThis is considered 'reflective' of their intelligence. 
+                
+            </p>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img src="/PAGE 2/SEA TURTLE.jpg" alt="Sea turtle" />
+          <div class="card-body">
+            <h3>Sea turtle</h3>
+            <p>
+                Sea turtles are ancient, air-breathing reptiles adapted to life in the ocean, found in all tropical and subtropical seas. They are known for their long lifespans and for the role they play in maintaining healthy marine ecosystems. There are seven species of sea turtles, each with unique characteristics and behaviors. They play a crucial role in maintaining the health of marine ecosystems by regulating plant and animal populations Sea turtles have a hard outer shell, a characteristic shared with other turtle speciesSea turtles have streamlined bodies and large flippers, making them well-suited for life in the sea. Sea turtles are ancient reptiles, having been around since the time of the dinosaurs. 
+            </p>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img src="/PAGE 2/SQUID.jpg" alt="Squid" />
+          <div class="card-body">
+            <h3>Squid</h3>
+            <p>
+                Squid are marine invertebrates with a soft body, ten arms (eight short arms and two longer tentacles), and a distinct head. They are known for their intelligence, speed, and unique adaptations for hunting and defense. Squid are also a popular food source and are enjoyed worldwideGiant squid eyes are the size of Frisbees.   There may be just one known species.  Giant squid tentacles can regenerate.Squid have a long, tube-shaped body, a small head, and ten arms. Two of the arms are longer than the others and are used for capturing preSquid have a soft, muscular cavity called the mantle, which surrounds their body. This mantle contains gills for breathing and a funnel for expelling water and in Eyes:
+                Squid have large eyes.
+                                                                            
+            </p>
+          </div>                                                                         
+        </div>
+    
+        <div class="card">
+          <img src="/PAGE 2/SHARK.jpg" alt="Shark" />
+          <div class="card-body">
+            <h3>Shark</h3>
+            <p>
+                Sharks are marine fish with a tough, grayish skin and a cartilaginous skeleton. They are known for their sharp, triangular teeth and muscular tails. Most sharks have a torpedo-shaped body that helps them move quickly through the water. A shark is a bigger, frightening and attacking aquatic animal of the sea. The colours of sharks may range from dark blue to grey or brown with a white belly Shark has a long, slim and a straight body which helps it to swim fast and to go deep inside the water Many Sharks Species Are Endangered.Depending On The Species, Sharks Can Give Birth In Three Different Ways The skin typically is dull gray and tough and has toothlike scales. Most sharks have a muscular, asymmetrical, 
+            </p>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img src="PAGE 2/CLOWN FISH.jpg" alt="Clown fish" />
+          <div class="card-body">
+            <h3>Clown fish</h3>
+            <p>
+                Clownfish, also known as anemonefish, are vibrant orange marine fish with distinctive white stripes and black tips. They are found in warm, shallow parts of the Indian and Pacific Oceans, particularly in coral reefs where sea anemones are abundant. These fish live in a symbiotic relationship with the anemone, meaning they both benefit from living together. Clownfish are protected from the anemone's stinging cells by a layer of mucus, and in return, they help keep the anemone healthy by removing parasites and feeding on small invertebrates that may be harmful to the anemone. 
+                Clownfish | Online Learning Center - Aquarium of the Pacific Clownfish are found singly, in pairs, and in small groups. They rarely move
+             </p>
+          </div>
+        </div>
+    
+        <div class="card">
+          <img src="PAGE 2/seal.jpg" alt="seal" />
+          <div class="card-body">
+            <h3>Seal</h3>
+            <p>
+                Seals are semi-aquatic mammals with streamlined bodies and webbed flippers, allowing them to be excellent swimmers. They are found in various marine environments, particularly in cold waters, and come in two main types: earless (or true) seals and eared seals (including sea lions and fur seals). Seals are carnivores, primarily feeding on fish, and are prey for larger predators like killer whales, polar bears, and large fish seal, any of 32 species of web-footed aquatic mammals that live chiefly in cold seas and whose body shape, round at the middle and tapered at the ends, is adapted to swift and graceful swimmingSeals sleep on land and in the water. Seals typically sleep on land when they have pups or are searching 
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      
+     <!-- Footer Start -->
+<footer style="background-image: url('./pics/DEER.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; padding: 40px 0; font-family: Arial, sans-serif; color: #ffffff; border-top: 4px solid #000000;">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background-color: rgba(0, 0, 0, 0.4); padding: 40px 20px; border-radius: 10px;">
+    
+    <!-- Logo and Description -->
+    <div style="flex: 1; min-width: 250px; padding: 20px;">
+      <img src="logo/CENTRAL ZOO LOGO.png" alt="Central Zoo Logo" style="width: 150px; margin-bottom: 15px;">
+      <p style="font-size: 14px; line-height: 1.6; color: #fff;">
+        Central Zoo is a premier wildlife sanctuary offering immersive experiences with diverse fauna. Join us for unforgettable adventures and educational programs.
+      </p>
+    </div>
+
+    
+    <!-- Quick Links -->
+<div class="footer-box" style="flex: 1; min-width: 200px; padding: 20px;">
+  <h3 style="margin-bottom: 15px; color: #fff;">&nbsp; &nbsp; Quick Links</h3>
+  <ul class="quick-links-list">
+    <li><a href="./index.html"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="./aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+    <li><a href="./gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+    <li><a href="./events.html"><i class="fas fa-calendar"></i> Events</a></li>
+    <li><a href="./contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+    <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+<li><a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a></li>
+
+  </ul>
+</div>
+
+
+    <!-- Contact Info -->
+    <div style="flex: 1; min-width: 250px; padding: 20px;">
+      <h3 style="margin-bottom: 15px; color: #fff;">Contact Us</h3>
+      <p style="font-size: 14px; line-height: 1.6; color: #fff;">
+        📍 123 Safari Lane, Karachi, Pakistan<br>
+        📞 +92 123 4567890<br>
+        📧 info@Centralzoo.pk
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom -->
+  <div style="text-align: center; padding: 20px; margin-top: 20px;">
+    <p style="font-size: 14px; color: #fff;">&copy; 2025 Central Zoo. All rights reserved.</p>
+  </div>
+</footer>
+<!-- Footer End -->
+
+<style>
+  .quick-links-list {
+    list-style: disc inside;
+    padding-left: 20px;
+  }
+
+  .quick-links-list li {
+    margin-bottom: 10px; 
+  }
+
+  .quick-links-list li::marker {
+    color: white;
+    transition: color 0.3s ease;
+  }
+
+  .quick-links-list li:hover::marker {
+    color: yellow;
+  }
+
+  .quick-links-list li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .quick-links-list li a:hover {
+    color: yellow;
+  }
+</style>
+
+</body>
+</html>
